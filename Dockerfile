@@ -1,4 +1,4 @@
-FROM php:8.3-cli-bookworm
+FROM php:8.4-cli-bookworm
 
 RUN apt-get update && apt-get install -y \
     git unzip curl libpq-dev libzip-dev libpng-dev libonig-dev \
@@ -20,4 +20,4 @@ RUN composer install --no-dev --optimize-autoloader \
 
 EXPOSE 10000
 
-ENTRYPOINT ["docker/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "docker/entrypoint.sh"]
