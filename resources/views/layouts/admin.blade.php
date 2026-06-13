@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin - ' . config('branding.name'))</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset(config('branding.favicon_png')) }}">
-    <link rel="icon" type="image/jpeg" href="{{ asset(config('branding.favicon')) }}">
-    <link rel="apple-touch-icon" href="{{ asset(config('branding.apple_touch_icon')) }}">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {

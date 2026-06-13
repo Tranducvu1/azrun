@@ -417,7 +417,7 @@ return [
     'banners' => [
         [
             'title' => 'AZ RUN — Chạy Cùng Đam Mê',
-            'image' => '9622a84c-0470-427a-8286-3575a386b71c.jpeg',
+            'image' => '684380779_840110025804268_4895100194890184507_n.jpg',
             'link' => '/shop',
             'description' => 'Khám phá bộ sưu tập mới — giày, phụ kiện, dinh dưỡng cho runner.',
             'sort_order' => 1,
