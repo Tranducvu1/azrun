@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', config('branding.name') . ' — Chạy Bộ, Trail & Outdoor Chính Hãng')</title>
     <meta name="description" content="@yield('meta_description', config('branding.name') . ' — Điểm đến #1 cho runner Việt Nam. Giày chạy bộ, trail, phụ kiện chính hãng. Freeship đơn 1M.')">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset(config('branding.favicon_png')) }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset(config('branding.favicon')) }}">
+    <link rel="apple-touch-icon" href="{{ asset(config('branding.apple_touch_icon')) }}">
     <link rel="stylesheet" href="{{ asset('css/storefront.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
