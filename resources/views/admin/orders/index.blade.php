@@ -11,7 +11,7 @@
                 <option value="{{ $s }}" {{ request('status') === $s ? 'selected' : '' }}>{{ $s }}</option>
             @endforeach
         </select>
-        <button class="px-4 py-2 bg-gray-800 text-white rounded-lg text-sm">Lọc</button>
+        <button class="px-4 py-2 bg-sport-accent text-white rounded-lg text-sm hover:bg-orange-600">Lọc</button>
     </form>
 </div>
 

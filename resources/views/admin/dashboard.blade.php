@@ -48,7 +48,7 @@
         <div class="space-y-3">
             @foreach($topProducts as $product)
                 <div class="flex items-center gap-3">
-                    <img src="{{ $product->thumbnail }}" class="w-10 h-10 rounded object-cover" alt="">
+                    <img src="{{ $product->displayThumbnail() }}" class="w-10 h-10 rounded object-cover" alt="{{ $product->name }}">
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium truncate">{{ $product->name }}</p>
                         <p class="text-xs text-gray-400">Đã bán: {{ $product->sold_count }}</p>

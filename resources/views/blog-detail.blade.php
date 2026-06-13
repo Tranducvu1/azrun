@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $post->title . ' — SportShop')
+@section('title', $post->title . ' — AZRun')
 
 @section('content')
 <article>

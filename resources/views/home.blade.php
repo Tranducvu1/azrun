@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'SportShop — Giày Chạy Bộ, Trail & Outdoor Chính Hãng #1 Việt Nam')
+@section('title', 'AZRun — Giày Chạy Bộ, Trail & Outdoor Chính Hãng #1 Việt Nam')
 
 @section('content')
 @php
@@ -21,7 +21,7 @@
         @forelse($banners as $i => $banner)
             <div x-show="current === {{ $i }}" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
                  class="absolute inset-0" {{ $i > 0 ? 'style=display:none' : '' }}>
-                <img src="{{ $banner->image }}" alt="{{ $banner->title }}" class="w-full h-full object-cover" loading="{{ $i === 0 ? 'eager' : 'lazy' }}">
+                <img src="{{ $banner->displayImage() }}" alt="{{ $banner->title }}" class="w-full h-full object-cover" loading="{{ $i === 0 ? 'eager' : 'lazy' }}">
                 <div class="absolute inset-0 hero-gradient"></div>
             </div>
         @empty
@@ -110,7 +110,7 @@
         @foreach($navCats as $i => $cat)
             <a href="{{ route('shop', ['category' => $cat->slug]) }}"
                class="group relative overflow-hidden rounded-2xl {{ $i === 0 ? 'col-span-2 row-span-2 aspect-square lg:aspect-auto lg:min-h-[280px]' : 'aspect-square' }} bg-brand-surface hover:shadow-card transition-all duration-500">
-                <img src="{{ $cat->image ?? 'https://placehold.co/400x400/141414/c8ff00?text=' . urlencode($cat->name) }}" alt="{{ $cat->name }}"
+                <img src="{{ $cat->displayImage() }}" alt="{{ $cat->name }}"
                      class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-brand-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
@@ -226,7 +226,7 @@
         @include('components.section-header', ['title' => 'Runner nói gì về chúng tôi', 'subtitle' => 'Reviews', 'dark' => true])
         <div class="grid md:grid-cols-3 gap-6">
             @foreach([
-                ['name' => 'Minh Tuấn', 'role' => 'Marathoner · HN', 'text' => 'Giày Hoka mua ở SportShop êm chân cực, giao hàng nhanh. Nhân viên tư vấn nhiệt tình, size chuẩn 100%.', 'rating' => 5],
+                ['name' => 'Minh Tuấn', 'role' => 'Marathoner · HN', 'text' => 'Giày Hoka mua ở AZRun êm chân cực, giao hàng nhanh. Nhân viên tư vấn nhiệt tình, size chuẩn 100%.', 'rating' => 5],
                 ['name' => 'Lan Anh', 'role' => 'Trail runner · Đà Lạt', 'text' => 'Mình hay chạy trail, shop có đủ đồ Salomon và phụ kiện. Giá tốt hơn nhiều chỗ khác, chính hãng yên tâm.', 'rating' => 5],
                 ['name' => 'Hoàng Long', 'role' => 'Coach · TP.HCM', 'text' => 'Recommend học viên mua ở đây. Đa dạng thương hiệu, chính sách đổi trả rõ ràng. Top shop running VN!', 'rating' => 5],
             ] as $review)

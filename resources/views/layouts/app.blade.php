@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'SportShop — Chạy Bộ, Trail & Outdoor Chính Hãng')</title>
-    <meta name="description" content="@yield('meta_description', 'SportShop — Điểm đến #1 cho runner Việt Nam. Giày chạy bộ, trail, phụ kiện chính hãng Nike, Adidas, Hoka. Freeship đơn 1M.')">
+    <title>@yield('title', config('branding.name') . ' — Chạy Bộ, Trail & Outdoor Chính Hãng')</title>
+    <meta name="description" content="@yield('meta_description', config('branding.name') . ' — Điểm đến #1 cho runner Việt Nam. Giày chạy bộ, trail, phụ kiện chính hãng. Freeship đơn 1M.')">
     <link rel="stylesheet" href="{{ asset('css/storefront.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,8 +12,9 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { black: '#0a0a0a', dark: '#141414', surface: '#f4f4f0', cream: '#fafaf8' },
-                        accent: { DEFAULT: '#ff4500', light: '#ff6b35', dark: '#e63e00' },
+                        brand: { black: '#0a0a0a', dark: '#141414', surface: '#fff7ed', cream: '#fffbf5' },
+                        primary: { DEFAULT: '#f97316', light: '#fb923c', dark: '#ea580c' },
+                        accent: { DEFAULT: '#f97316', light: '#fb923c', dark: '#ea580c' },
                         lime: '#c8ff00',
                     },
                     fontFamily: {
@@ -43,7 +44,7 @@
 }">
 
     {{-- PROMO TICKER --}}
-    <div class="bg-brand-black text-white overflow-hidden relative z-[60]">
+    <div class="bg-gradient-to-r from-primary-dark via-primary to-primary-light text-white overflow-hidden relative z-[60]">
         <div class="flex animate-marquee whitespace-nowrap py-2">
             @foreach(range(1,2) as $i)
                 <div class="flex items-center shrink-0">
@@ -77,20 +78,16 @@
     <header class="sticky top-0 z-50" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 20)" :class="scrolled && 'header-scrolled'">
 
         {{-- Row 1: Logo + Search + Actions --}}
-        <div class="bg-white/95 backdrop-blur-xl border-b border-gray-100">
+        <div class="bg-white/95 backdrop-blur-xl border-b-2 border-primary/20">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex items-center gap-4 h-[68px]">
 
                     <a href="/" class="flex items-center gap-3 shrink-0 group">
-                        <div class="relative w-11 h-11">
-                            <div class="absolute inset-0 bg-accent rounded-2xl rotate-6 group-hover:rotate-12 transition-transform duration-300 opacity-80"></div>
-                            <div class="relative w-11 h-11 bg-brand-black rounded-2xl flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
-                                <svg class="w-5 h-5 text-lime" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C12.8 12 14.8 13 16.5 13c1.7 0 3.5-1.1 3.5-1.1l-.7-2s-1.4.7-2.8.7c-1.3 0-2.4-.6-2.4-1.5 0-.5.4-1 .9-1.3L9.8 8.9z"/></svg>
-                            </div>
-                        </div>
+                        <img src="{{ config('branding.logo') }}" alt="{{ config('branding.name') }}"
+                             class="h-11 w-11 rounded-xl object-cover shadow-sm ring-2 ring-primary/20 group-hover:ring-primary/40 group-hover:scale-105 transition-all duration-300">
                         <div class="hidden sm:block">
-                            <span class="font-display text-[22px] font-bold tracking-tight leading-none text-brand-black">SPORT<span class="text-accent">SHOP</span></span>
-                            <p class="text-[9px] text-gray-400 font-bold tracking-[0.25em] uppercase mt-0.5">Run · Trail · Outdoor</p>
+                            <span class="font-display text-[22px] font-bold tracking-tight leading-none text-brand-black">AZ<span class="text-primary">Run</span></span>
+                            <p class="text-[9px] text-gray-400 font-bold tracking-[0.25em] uppercase mt-0.5">{{ config('branding.tagline') }}</p>
                         </div>
                     </a>
 
@@ -102,7 +99,7 @@
                                 <svg class="ml-4 w-5 h-5 text-gray-400 group-focus-within:text-accent shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                                 <input type="text" name="q" placeholder="Tìm giày Nike, Hoka, áo chạy bộ..." value="{{ request('q') }}"
                                        class="flex-1 px-3 py-3 bg-transparent text-sm focus:outline-none placeholder:text-gray-400">
-                                <button type="submit" class="mr-1.5 px-4 py-2 bg-brand-black text-white text-xs font-bold rounded-xl hover:bg-accent transition-colors shrink-0">Tìm</button>
+                                <button type="submit" class="mr-1.5 px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-dark transition-colors shrink-0">Tìm</button>
                             </div>
                         </div>
                     </form>
@@ -115,15 +112,15 @@
 
                         @auth
                             <a href="{{ route('account') }}" class="hidden sm:flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-2xl hover:bg-brand-surface transition-all group">
-                                <div class="w-9 h-9 rounded-xl bg-brand-black text-lime flex items-center justify-center text-xs font-black group-hover:bg-accent group-hover:text-white transition-colors">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
+                                <div class="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center text-xs font-black group-hover:bg-primary-dark transition-colors">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
                                 <span class="hidden lg:block text-sm font-semibold text-gray-700 max-w-[72px] truncate">{{ auth()->user()->name }}</span>
                             </a>
                         @else
                             <a href="{{ route('login') }}" class="hidden sm:inline-flex px-3 py-2 text-sm font-semibold text-gray-600 hover:text-accent transition-colors">Đăng nhập</a>
-                            <a href="{{ route('register') }}" class="hidden sm:inline-flex px-4 py-2.5 text-sm font-bold bg-brand-black text-white rounded-xl hover:bg-accent transition-all hover:shadow-glow">Đăng ký</a>
+                            <a href="{{ route('register') }}" class="hidden sm:inline-flex px-4 py-2.5 text-sm font-bold bg-primary text-white rounded-xl hover:bg-primary-dark transition-all hover:shadow-glow">Đăng ký</a>
                         @endauth
 
-                        <button @click="cartOpen = true" class="relative flex items-center gap-2 pl-3 pr-4 py-2.5 ml-1 bg-brand-surface hover:bg-brand-black hover:text-white rounded-2xl transition-all group">
+                        <button @click="cartOpen = true" class="relative flex items-center gap-2 pl-3 pr-4 py-2.5 ml-1 bg-primary/10 hover:bg-primary hover:text-white rounded-2xl transition-all group">
                             <svg class="w-5 h-5 text-gray-700 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                             <span class="hidden sm:inline text-sm font-bold">Giỏ</span>
                             @if($cartCount > 0)
@@ -148,7 +145,7 @@
         </div>
 
         {{-- Row 2: Category nav + Mega menu --}}
-        <div class="hidden xl:block bg-brand-black relative" @mouseleave="scheduleCloseMega()">
+        <div class="hidden xl:block bg-gradient-to-r from-primary-dark via-primary to-primary relative" @mouseleave="scheduleCloseMega()">
             <div class="max-w-7xl mx-auto px-4">
                 <nav class="flex items-center h-[48px]">
                     <a href="{{ route('shop') }}" class="header-nav-link text-lime font-bold mr-2">
@@ -202,7 +199,7 @@
                             {{-- Featured category --}}
                             <div class="col-span-3">
                                 <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="group block relative rounded-2xl overflow-hidden aspect-[3/4] bg-brand-black">
-                                    <img src="{{ $cat->image ?? 'https://placehold.co/400x560/141414/ff4500?text=' . urlencode($cat->name) }}"
+                                    <img src="{{ $cat->displayImage() }}"
                                          alt="{{ $cat->name }}" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700">
                                     <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent"></div>
                                     <div class="absolute bottom-0 left-0 right-0 p-5">
@@ -227,7 +224,7 @@
                                         @foreach($cat->children as $child)
                                             <a href="{{ route('shop', ['category' => $child->slug]) }}" class="mega-subcat-tile group">
                                                 <div class="mega-subcat-img w-12 h-12 rounded-xl overflow-hidden shrink-0 ring-2 ring-gray-100">
-                                                    <img src="{{ $child->image ?? $cat->image ?? 'https://placehold.co/96x96/f4f4f0/333?text=' . urlencode(substr($child->name,0,1)) }}"
+                                                    <img src="{{ $child->displayImage() }}"
                                                          alt="{{ $child->name }}" class="w-full h-full object-cover">
                                                 </div>
                                                 <div>
@@ -252,7 +249,7 @@
                                 <div class="space-y-3">
                                     @forelse($cat->products as $fp)
                                         <a href="{{ route('product.show', $fp->slug) }}" class="flex gap-3 p-2 rounded-xl hover:bg-brand-surface transition-colors group">
-                                            <img src="{{ $fp->thumbnail }}" alt="" class="w-14 h-14 rounded-xl object-cover shrink-0 ring-1 ring-gray-100">
+                                            <img src="{{ $fp->displayThumbnail() }}" alt="{{ $fp->name }}" class="w-14 h-14 rounded-xl object-cover shrink-0 ring-1 ring-gray-100">
                                             <div class="min-w-0">
                                                 <p class="text-xs font-semibold text-brand-black line-clamp-2 group-hover:text-accent transition-colors">{{ $fp->name }}</p>
                                                 <p class="text-sm font-bold text-accent mt-0.5">{{ number_format($fp->current_price, 0, ',', '.') }}₫</p>
@@ -285,7 +282,7 @@
         </div>
 
         {{-- Mobile Menu --}}
-        <div x-show="mobileMenu" x-transition class="xl:hidden bg-brand-black border-t border-white/10 max-h-[80vh] overflow-y-auto">
+        <div x-show="mobileMenu" x-transition class="xl:hidden bg-gradient-to-b from-primary to-primary-dark border-t border-white/10 max-h-[80vh] overflow-y-auto">
             <div class="max-w-7xl mx-auto px-4 py-5">
                 <form action="{{ route('shop') }}" method="GET" class="mb-5">
                     <input type="text" name="q" placeholder="Tìm sản phẩm..." class="w-full px-4 py-3.5 bg-white/10 text-white placeholder:text-white/40 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 border border-white/10">
@@ -294,7 +291,7 @@
                     <div x-data="{ open: false }" class="border-b border-white/5 last:border-0">
                         <div class="flex items-center">
                             <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="flex-1 flex items-center gap-3 py-4">
-                                <img src="{{ $cat->image ?? 'https://placehold.co/48x48/222/c8ff00?text=' . urlencode(substr($cat->name,0,1)) }}" class="w-10 h-10 rounded-xl object-cover" alt="">
+                                <img src="{{ $cat->displayImage() }}" class="w-10 h-10 rounded-xl object-cover" alt="">
                                 <span class="font-semibold text-white">{{ $cat->name }}</span>
                             </a>
                             @if($cat->children->count())
@@ -361,7 +358,7 @@
                             @if($p)
                                 @php $miniTotal += $p->current_price * $qty; @endphp
                                 <div class="flex gap-4 p-3 bg-brand-surface rounded-2xl">
-                                    <img src="{{ $p->thumbnail }}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="">
+                                    <img src="{{ $p->displayThumbnail() }}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="{{ $p->name }}">
                                     <div class="flex-1 min-w-0">
                                         <p class="text-sm font-semibold text-brand-black line-clamp-2">{{ $p->name }}</p>
                                         @if($p->brand)<p class="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">{{ $p->brand->name }}</p>@endif
@@ -412,37 +409,38 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer class="bg-brand-black text-gray-400 mt-0">
+    <footer class="bg-gradient-to-br from-primary-dark via-primary to-primary-light text-white mt-0 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background: radial-gradient(ellipse at 20% 0%, rgba(200,255,0,0.25) 0%, transparent 50%), radial-gradient(ellipse at 80% 100%, rgba(0,0,0,0.15) 0%, transparent 50%);"></div>
+
         {{-- Newsletter CTA --}}
-        <div class="border-b border-white/10">
+        <div class="border-b border-white/20 relative">
             <div class="max-w-7xl mx-auto px-4 py-16">
                 <div class="grid lg:grid-cols-2 gap-10 items-center">
                     <div>
                         <p class="text-lime text-xs font-bold tracking-[0.2em] uppercase mb-3">Join the crew</p>
-                        <h2 class="font-display text-3xl md:text-4xl font-bold text-white leading-tight">Nhận ưu đãi độc quyền<br><span class="text-gradient">dành riêng cho runner</span></h2>
-                        <p class="text-gray-500 mt-3 text-sm">Giảm 10% đơn đầu tiên + cập nhật sản phẩm mới mỗi tuần</p>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-white leading-tight">Nhận ưu đãi độc quyền<br><span class="text-lime">dành riêng cho runner</span></h2>
+                        <p class="text-white/70 mt-3 text-sm">Giảm 10% đơn đầu tiên + cập nhật sản phẩm mới mỗi tuần</p>
                     </div>
                     <form class="flex flex-col sm:flex-row gap-3">
-                        <input type="email" placeholder="Email của bạn" class="flex-1 px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 text-sm">
-                        <button type="button" class="px-8 py-4 bg-accent text-white font-bold rounded-2xl hover:bg-accent-light transition-colors shrink-0">Nhận ưu đãi</button>
+                        <input type="email" placeholder="Email của bạn" class="flex-1 px-5 py-4 bg-white/15 border border-white/25 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20 text-sm backdrop-blur-sm">
+                        <button type="button" class="px-8 py-4 bg-brand-black text-white font-bold rounded-2xl hover:bg-brand-black/80 transition-colors shrink-0 shadow-lg">Nhận ưu đãi</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 py-14">
+        <div class="max-w-7xl mx-auto px-4 py-14 relative">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 <div>
-                    <div class="flex items-center gap-2.5 mb-5">
-                        <div class="w-9 h-9 bg-accent rounded-xl flex items-center justify-center">
-                            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C12.8 12 14.8 13 16.5 13c1.7 0 3.5-1.1 3.5-1.1l-.7-2s-1.4.7-2.8.7c-1.3 0-2.4-.6-2.4-1.5 0-.5.4-1 .9-1.3L9.8 8.9z"/></svg>
-                        </div>
-                        <span class="font-display text-lg font-bold text-white">SPORT<span class="text-accent">SHOP</span></span>
+                    <div class="flex items-center gap-3 mb-5">
+                        <img src="{{ config('branding.logo') }}" alt="{{ config('branding.name') }}"
+                             class="h-12 w-12 rounded-xl object-cover shadow-lg ring-2 ring-white/30">
+                        <span class="font-display text-xl font-bold text-white">AZ<span class="text-lime">Run</span></span>
                     </div>
-                    <p class="text-sm leading-relaxed text-gray-500">Hệ thống bán lẻ chuyên sâu về chạy bộ, trail và outdoor — nơi runner Việt tìm thấy đam mê.</p>
+                    <p class="text-sm leading-relaxed text-white/75">Hệ thống bán lẻ chuyên sâu về chạy bộ, trail và outdoor — nơi runner Việt tìm thấy đam mê.</p>
                     <div class="flex gap-3 mt-5">
                         @foreach(['facebook','instagram','youtube'] as $social)
-                            <a href="#" class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-accent/20 hover:text-accent transition-colors">
+                            <a href="#" class="w-10 h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center hover:bg-white/25 hover:text-lime transition-colors">
                                 <span class="text-xs font-bold uppercase">{{ substr($social, 0, 2) }}</span>
                             </a>
                         @endforeach
@@ -450,45 +448,45 @@
                 </div>
                 <div>
                     <h4 class="font-display font-bold text-white mb-5 text-sm tracking-wider uppercase">Cửa hàng</h4>
-                    <ul class="text-sm space-y-3">
-                        <li><a href="{{ route('shop') }}" class="hover:text-white transition-colors">Tất cả sản phẩm</a></li>
-                        <li><a href="{{ route('shop', ['sort' => 'newest']) }}" class="hover:text-white transition-colors">Hàng mới về</a></li>
-                        <li><a href="{{ route('shop', ['sort' => 'bestseller']) }}" class="hover:text-white transition-colors">Bán chạy nhất</a></li>
-                        <li><a href="{{ route('brands.index') }}" class="hover:text-white transition-colors">Thương hiệu</a></li>
-                        <li><a href="{{ route('blog.index') }}" class="hover:text-white transition-colors">Blog & Tips</a></li>
+                    <ul class="text-sm space-y-3 text-white/75">
+                        <li><a href="{{ route('shop') }}" class="hover:text-lime transition-colors">Tất cả sản phẩm</a></li>
+                        <li><a href="{{ route('shop', ['sort' => 'newest']) }}" class="hover:text-lime transition-colors">Hàng mới về</a></li>
+                        <li><a href="{{ route('shop', ['sort' => 'bestseller']) }}" class="hover:text-lime transition-colors">Bán chạy nhất</a></li>
+                        <li><a href="{{ route('brands.index') }}" class="hover:text-lime transition-colors">Thương hiệu</a></li>
+                        <li><a href="{{ route('blog.index') }}" class="hover:text-lime transition-colors">Blog & Tips</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-display font-bold text-white mb-5 text-sm tracking-wider uppercase">Hỗ trợ</h4>
-                    <ul class="text-sm space-y-3">
-                        <li><a href="#" class="hover:text-white transition-colors">Chính sách đổi trả</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Vận chuyển & giao hàng</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Thanh toán</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Bảo hành</a></li>
-                        <li><a href="tel:0846335858" class="hover:text-accent transition-colors font-semibold text-white">📞 0846 335 858</a></li>
+                    <ul class="text-sm space-y-3 text-white/75">
+                        <li><a href="#" class="hover:text-lime transition-colors">Chính sách đổi trả</a></li>
+                        <li><a href="#" class="hover:text-lime transition-colors">Vận chuyển & giao hàng</a></li>
+                        <li><a href="#" class="hover:text-lime transition-colors">Thanh toán</a></li>
+                        <li><a href="#" class="hover:text-lime transition-colors">Bảo hành</a></li>
+                        <li><a href="tel:0846335858" class="hover:text-lime transition-colors font-semibold text-white">📞 0846 335 858</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-display font-bold text-white mb-5 text-sm tracking-wider uppercase">Showroom</h4>
-                    <div class="text-sm space-y-4 text-gray-500">
+                    <div class="text-sm space-y-4 text-white/75">
                         <div>
-                            <p class="text-white font-semibold text-xs mb-1">HÀ NỘI</p>
+                            <p class="text-lime font-semibold text-xs mb-1">HÀ NỘI</p>
                             <p>58A Ngõ 92, Thanh Nhàn, Bạch Mai</p>
                             <p class="mt-1">Luxury Park Views, Cầu Giấy</p>
                         </div>
                         <div>
-                            <p class="text-white font-semibold text-xs mb-1">TP. HCM</p>
+                            <p class="text-lime font-semibold text-xs mb-1">TP. HCM</p>
                             <p>285/21 CMT8, Hòa Hưng</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-14 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
-                <p>© 2026 SportShop · GPKD 0109685009 · Chính hãng 100%</p>
+            <div class="mt-14 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/60">
+                <p>© 2026 {{ config('branding.name') }} · GPKD 0109685009 · Chính hãng 100%</p>
                 <div class="flex gap-4">
-                    <img src="https://placehold.co/40x24/333/fff?text=VISA" alt="Visa" class="h-6 opacity-50">
-                    <img src="https://placehold.co/40x24/333/fff?text=MC" alt="Mastercard" class="h-6 opacity-50">
-                    <img src="https://placehold.co/40x24/333/fff?text=VNPAY" alt="VNPay" class="h-6 opacity-50">
+                    <img src="https://placehold.co/40x24/fff/ea580c?text=VISA" alt="Visa" class="h-6 opacity-70 rounded">
+                    <img src="https://placehold.co/40x24/fff/ea580c?text=MC" alt="Mastercard" class="h-6 opacity-70 rounded">
+                    <img src="https://placehold.co/40x24/fff/ea580c?text=VNPAY" alt="VNPay" class="h-6 opacity-70 rounded">
                 </div>
             </div>
         </div>

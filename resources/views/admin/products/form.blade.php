@@ -32,12 +32,13 @@
                 </select>
             </div>
             <div>
-                <label class="block text-sm font-medium mb-1">Thương hiệu *</label>
-                <select name="brand_id" required class="w-full px-3 py-2 border rounded-lg text-sm">
+                <label class="block text-sm font-medium mb-1">Thương hiệu</label>
+                <select name="brand_id" class="w-full px-3 py-2 border rounded-lg text-sm">
                     @foreach($brands as $brand)
                         <option value="{{ $brand->id }}" {{ old('brand_id', $product->brand_id) == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                     @endforeach
                 </select>
+                <p class="text-xs text-gray-400 mt-1">Để trống sẽ dùng thương hiệu "Khác"</p>
             </div>
             <div>
                 <label class="block text-sm font-medium mb-1">Giá gốc *</label>
@@ -52,11 +53,16 @@
                 <input type="number" name="stock_quantity" value="{{ old('stock_quantity', $product->stock_quantity ?? 0) }}" required min="0" class="w-full px-3 py-2 border rounded-lg text-sm">
             </div>
             <div class="md:col-span-2">
+                <label class="block text-sm font-medium mb-1">Size sản phẩm</label>
+                <input type="text" name="sizes" value="{{ old('sizes', $sizesText ?? '') }}" class="w-full px-3 py-2 border rounded-lg text-sm" placeholder="VD: 39, 40, 41, 42, 43, 44 hoặc S, M, L, XL">
+                <p class="text-xs text-gray-400 mt-1">Nhập các size cách nhau bằng dấu phẩy. Khách sẽ chọn size khi mua hàng.</p>
+            </div>
+            <div class="md:col-span-2">
                 <label class="block text-sm font-medium mb-1">Ảnh chính</label>
                 <input type="file" name="thumbnail_file" accept="image/*" class="w-full text-sm mb-2">
                 <input type="url" name="thumbnail" value="{{ old('thumbnail', $product->thumbnail) }}" class="w-full px-3 py-2 border rounded-lg text-sm" placeholder="Hoặc dán URL ảnh">
                 @if($product->thumbnail)
-                    <img src="{{ $product->thumbnail }}" class="mt-2 w-24 h-24 object-cover rounded" alt="">
+                    <img src="{{ $product->displayThumbnail() }}" class="mt-2 w-24 h-24 object-cover rounded" alt="">
                 @endif
             </div>
             <div class="md:col-span-2">
@@ -87,7 +93,7 @@
     </div>
 
     <div class="mt-6 flex gap-3">
-        <button type="submit" class="px-6 py-2 bg-sport-accent text-white rounded-lg font-medium hover:bg-red-600">Lưu</button>
+        <button type="submit" class="px-6 py-2 bg-sport-accent text-white rounded-lg font-medium hover:bg-orange-600">Lưu</button>
         <a href="{{ route('admin.products.index') }}" class="px-6 py-2 border rounded-lg text-gray-600 hover:bg-gray-50">Huỷ</a>
     </div>
 </form>

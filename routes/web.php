@@ -52,4 +52,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::resource('banners', App\Http\Controllers\Admin\BannerController::class);
     Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
     Route::resource('coupons', App\Http\Controllers\Admin\CouponController::class);
+    Route::get('reviews', [App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('reviews.index');
+    Route::patch('reviews/{review}/approve', [App\Http\Controllers\Admin\ReviewController::class, 'approve'])->name('reviews.approve');
+    Route::delete('reviews/{review}', [App\Http\Controllers\Admin\ReviewController::class, 'reject'])->name('reviews.reject');
 });

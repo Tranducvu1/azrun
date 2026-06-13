@@ -17,7 +17,7 @@ class ImageUploadService
         $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
         $path = $file->storeAs($folder, $filename, 'public');
 
-        return Storage::disk('public')->url($path);
+        return '/storage/' . ltrim($path, '/');
     }
 
     public function uploadMultiple(array $files, string $folder = 'uploads'): array

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Thương Hiệu — SportShop')
+@section('title', 'Thương Hiệu — AZRun')
 
 @section('content')
 <div class="bg-brand-black text-white py-12 md:py-16">

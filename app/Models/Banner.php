@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\ImageUrl;
 use Illuminate\Database\Eloquent\Model;
 
 class Banner extends Model
@@ -23,5 +24,10 @@ class Banner extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('sort_order');
+    }
+
+    public function displayImage(): string
+    {
+        return ImageUrl::resolve($this->attributes['image'] ?? null);
     }
 }

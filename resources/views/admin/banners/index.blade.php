@@ -6,7 +6,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     @foreach($banners as $banner)
         <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-            <img src="{{ $banner->image }}" class="w-full h-40 object-cover" alt="">
+            <img src="{{ $banner->displayImage() }}" class="w-full h-40 object-cover" alt="">
             <div class="p-4 flex items-center justify-between">
                 <div><p class="font-medium">{{ $banner->title }}</p><p class="text-xs text-gray-400">{{ $banner->is_active ? 'Active' : 'Ẩn' }}</p></div>
                 <div class="space-x-2 text-sm">

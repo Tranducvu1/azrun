@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Đặt Hàng Thành Công — SportShop')
+@section('title', 'Đặt Hàng Thành Công — AZRun')
 
 @section('content')
 <div class="max-w-2xl mx-auto px-4 py-12 md:py-20 text-center">
@@ -19,7 +19,7 @@
     </div>
 
     <h1 class="font-display text-3xl md:text-4xl font-bold text-brand-black mb-2">Đặt hàng thành công! 🎉</h1>
-    <p class="text-gray-500 mb-2">Cảm ơn bạn đã tin tưởng SportShop</p>
+    <p class="text-gray-500 mb-2">Cảm ơn bạn đã tin tưởng AZRun</p>
     <p class="text-sm text-gray-400 mb-8">Mã đơn hàng: <span class="font-display font-bold text-accent text-xl">{{ $order->order_code }}</span></p>
 
     <div class="bg-white rounded-3xl shadow-card p-6 md:p-8 text-left mb-8">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Cửa Hàng — SportShop')
+@section('title', 'Cửa Hàng — AZRun')
 
 @section('content')
 {{-- Page Hero --}}

@@ -32,19 +32,20 @@ php artisan serve
 
 Truy cập: http://127.0.0.1:8000
 
-## Tài khoản demo
+## Tài khoản admin
 
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@sportshop.vn | password |
-| Khách | customer@test.com | password |
+
+> Database khởi tạo **trống** — không có sản phẩm/danh mục mẫu. Vào `/admin` để thêm dữ liệu thật.
 
 ## Cấu trúc chính
 
 ```
 app/Http/Controllers/     # Controllers frontend + admin
 app/Models/               # Eloquent models
-database/seeders/         # DemoDataSeeder (15 SP, 17 brands, 7 categories...)
+database/seeders/         # AdminSeeder (chỉ tạo tài khoản admin + brand mặc định)
 resources/views/          # Blade templates
 routes/web.php            # Routes
 ```
@@ -53,6 +54,10 @@ routes/web.php            # Routes
 
 SQLite mặc định (`database/database.sqlite`). Đổi sang MySQL trong `.env` nếu cần.
 
-## Ảnh sản phẩm
+## Nhập dữ liệu sản phẩm qua Admin
 
-Demo dùng placeholder từ `placehold.co`. Admin có thể nhập URL ảnh khi thêm/sửa sản phẩm.
+1. **Danh mục** (`/admin/categories`) — thêm hạng mục cha/con
+2. **Sản phẩm** (`/admin/products`) — tên, danh mục, giá bán, size, mô tả, ảnh
+3. Size nhập dạng: `39, 40, 41, 42` hoặc `S, M, L, XL`
+
+Ảnh: upload file hoặc dán URL trực tiếp trong form admin.

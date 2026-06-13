@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Thanh Toán — SportShop')
+@section('title', 'Thanh Toán — AZRun')
 
 @section('content')
 <div class="max-w-5xl mx-auto px-4 py-8 md:py-12">
@@ -104,7 +104,7 @@
                 <div class="space-y-4 mb-5 max-h-64 overflow-y-auto">
                     @foreach($items as $item)
                         <div class="flex gap-3">
-                            <img src="{{ $item['product']->thumbnail }}" class="w-14 h-14 rounded-xl object-cover shrink-0" alt="">
+                            <img src="{{ $item['product']->displayThumbnail() }}" class="w-14 h-14 rounded-xl object-cover shrink-0" alt="{{ $item['product']->name }}">
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm font-semibold text-brand-black truncate">{{ $item['product']->name }}</p>
                                 <p class="text-xs text-gray-400">x{{ $item['quantity'] }}</p>

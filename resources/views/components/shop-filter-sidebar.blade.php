@@ -2,7 +2,7 @@
 @props(['categories', 'brands'])
 
 <aside class="w-full lg:w-[300px] shrink-0" x-data="{ sidebarOpen: true, openCat: '{{ request('category') }}' }">
-    <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden w-full flex items-center justify-between px-5 py-4 bg-brand-black text-white rounded-2xl font-display font-bold mb-4">
+    <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden w-full flex items-center justify-between px-5 py-4 bg-gradient-to-r from-primary-dark to-primary text-white rounded-2xl font-display font-bold mb-4">
         <span class="flex items-center gap-2">
             <svg class="w-5 h-5 text-lime" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
             Bộ lọc & Danh mục
@@ -13,7 +13,7 @@
     <div x-show="sidebarOpen" class="lg:block space-y-4 sticky top-[140px]">
 
         {{-- Categories card --}}
-        <div class="bg-brand-black rounded-3xl overflow-hidden shadow-glow border border-white/5">
+        <div class="bg-gradient-to-b from-primary-dark to-primary rounded-3xl overflow-hidden shadow-glow border border-orange-400/20">
             <div class="px-5 py-4 border-b border-white/10 flex items-center justify-between">
                 <div>
                     <p class="text-lime text-[10px] font-bold tracking-[0.2em] uppercase">Browse</p>
@@ -49,7 +49,7 @@
                             <a href="{{ route('shop', ['category' => $cat->slug]) }}"
                                class="sidebar-cat-item flex-1 flex items-center gap-3 px-3 py-3 rounded-2xl transition-all {{ $isParentActive ? 'sidebar-cat-active' : 'hover:bg-white/5' }}">
                                 <div class="w-11 h-11 rounded-xl overflow-hidden shrink-0 ring-1 ring-white/10">
-                                    <img src="{{ $cat->image ?? 'https://placehold.co/88x88/1a1a1a/c8ff00?text=' . urlencode(substr($cat->name, 0, 1)) }}"
+                                    <img src="{{ $cat->displayImage() }}"
                                          alt="{{ $cat->name }}" class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1 min-w-0">
@@ -122,7 +122,7 @@
                     <input type="number" name="price_min" placeholder="Từ ₫" value="{{ request('price_min') }}" class="w-full px-3 py-2.5 bg-brand-surface rounded-xl text-sm border-0 focus:ring-2 focus:ring-accent/20">
                     <input type="number" name="price_max" placeholder="Đến ₫" value="{{ request('price_max') }}" class="w-full px-3 py-2.5 bg-brand-surface rounded-xl text-sm border-0 focus:ring-2 focus:ring-accent/20">
                 </div>
-                <button class="w-full py-2.5 bg-brand-black text-white text-sm font-bold rounded-xl hover:bg-accent transition-colors">Lọc giá</button>
+                <button class="w-full py-2.5 bg-white text-primary text-sm font-bold rounded-xl hover:bg-orange-50 transition-colors">Lọc giá</button>
             </form>
         </div>
 

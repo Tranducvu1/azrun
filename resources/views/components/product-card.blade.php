@@ -9,7 +9,7 @@
 <div class="group relative {{ $isDark ? 'bg-white/5 backdrop-blur-sm border-white/10' : 'bg-white border-gray-100' }} rounded-2xl overflow-hidden border hover:border-accent/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10 card-shine">
     <div class="relative aspect-square bg-brand-surface overflow-hidden">
         <a href="{{ route('product.show', $product->slug) }}">
-            <img src="{{ $product->thumbnail }}" alt="{{ $product->name }}"
+            <img src="{{ $product->displayThumbnail() }}" alt="{{ $product->name }}"
                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy">
         </a>
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Tin Tức — SportShop')
+@section('title', 'Tin Tức — AZRun')
 
 @section('content')
 <div class="bg-brand-black text-white py-12 md:py-16 relative overflow-hidden">

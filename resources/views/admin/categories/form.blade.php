@@ -15,6 +15,7 @@
                 @endforeach
             </select>
         </div>
+        <div><label class="block text-sm font-medium mb-1">Mô tả</label><textarea name="description" rows="3" class="w-full px-3 py-2 border rounded-lg text-sm">{{ old('description', $category->description) }}</textarea></div>
         <div><label class="block text-sm font-medium mb-1">Ảnh (URL)</label><input type="url" name="image" value="{{ old('image', $category->image) }}" class="w-full px-3 py-2 border rounded-lg text-sm"></div>
         <div><label class="block text-sm font-medium mb-1">Thứ tự</label><input type="number" name="sort_order" value="{{ old('sort_order', $category->sort_order ?? 0) }}" class="w-full px-3 py-2 border rounded-lg text-sm"></div>
         <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="is_active" value="1" {{ old('is_active', $category->is_active ?? true) ? 'checked' : '' }}> Hiển thị</label>

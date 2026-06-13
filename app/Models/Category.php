@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\ImageUrl;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -40,5 +41,13 @@ class Category extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('sort_order')->orderBy('name');
+    }
+
+    public function displayImage(): string
+    {
+        return ImageUrl::resolve(
+            $this->attributes['image'] ?? null,
+            'https://placehold.co/400x400/141414/f97316?text=' . urlencode($this->name)
+        );
     }
 }

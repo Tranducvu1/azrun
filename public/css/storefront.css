@@ -3,10 +3,14 @@
 :root {
     --brand-black: #0a0a0a;
     --brand-dark: #141414;
-    --brand-surface: #f4f4f0;
-    --brand-cream: #fafaf8;
-    --accent: #ff4500;
-    --accent-light: #ff6b35;
+    --brand-surface: #fff7ed;
+    --brand-cream: #fffbf5;
+    --primary: #f97316;
+    --primary-dark: #ea580c;
+    --primary-light: #fb923c;
+    --accent: #f97316;
+    --accent-light: #fb923c;
+    --accent-dark: #ea580c;
     --lime: #c8ff00;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -125,7 +129,7 @@ body { font-family: 'Be Vietnam Pro', system-ui, sans-serif; }
     left: 14px;
     right: 14px;
     height: 2px;
-    background: var(--lime);
+    background: #fff;
     border-radius: 2px 2px 0 0;
     transform: scaleX(0);
     transition: transform 0.3s var(--ease-out);
@@ -179,3 +183,87 @@ body { font-family: 'Be Vietnam Pro', system-ui, sans-serif; }
 .header-scrolled {
     box-shadow: 0 8px 32px rgba(0,0,0,0.12);
 }
+
+/* ── Product gallery ── */
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 20;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    color: var(--brand-black);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    opacity: 0;
+    transition: all 0.3s var(--ease-out);
+}
+.group\/stage:hover .gallery-nav { opacity: 1; }
+.gallery-nav:hover { background: var(--primary); color: #fff; transform: translateY(-50%) scale(1.08); }
+.gallery-nav-prev { left: 12px; }
+.gallery-nav-next { right: 12px; }
+
+.gallery-thumbs-scroll::-webkit-scrollbar { height: 4px; }
+.gallery-thumbs-scroll::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+.gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+.gallery-lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 210;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    transition: background 0.2s;
+}
+.gallery-lightbox-close:hover { background: var(--primary); }
+.gallery-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 210;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.25s var(--ease-out);
+}
+.gallery-lightbox-nav:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-50%) scale(1.06); }
+.gallery-lightbox-prev { left: 16px; }
+.gallery-lightbox-next { right: 16px; }
+.gallery-lightbox-stage {
+    max-width: 90vw;
+    animation: gallery-pop 0.4s var(--ease-out);
+}
+@keyframes gallery-pop {
+    from { opacity: 0; transform: scale(0.92) translateY(12px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+[x-cloak] { display: none !important; }

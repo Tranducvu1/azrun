@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Giỏ Hàng — SportShop')
+@section('title', 'Giỏ Hàng — AZRun')
 
 @section('content')
 <div class="max-w-5xl mx-auto px-4 py-8 md:py-12">
@@ -35,7 +35,7 @@
                 @foreach($items as $item)
                     <div class="bg-white rounded-2xl shadow-card p-4 md:p-5 flex gap-4 md:gap-5">
                         <a href="{{ route('product.show', $item['product']->slug) }}" class="shrink-0">
-                            <img src="{{ $item['product']->thumbnail }}" alt="" class="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover">
+                            <img src="{{ $item['product']->displayThumbnail() }}" alt="{{ $item['product']->name }}" class="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover">
                         </a>
                         <div class="flex-1 min-w-0 flex flex-col">
                             <a href="{{ route('product.show', $item['product']->slug) }}" class="font-semibold text-brand-black hover:text-accent line-clamp-2 transition-colors">{{ $item['product']->name }}</a>

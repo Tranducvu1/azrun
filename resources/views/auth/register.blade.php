@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Đăng Ký — SportShop')
+@section('title', 'Đăng Ký — AZRun')
 
 @section('content')
 <div class="min-h-[80vh] grid lg:grid-cols-2">

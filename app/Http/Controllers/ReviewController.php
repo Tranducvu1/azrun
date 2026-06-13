@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReviewSubmitted;
 use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -17,11 +18,13 @@ class ReviewController extends Controller
             'content' => 'nullable|string|max:2000',
         ]);
 
-        Review::updateOrCreate(
+        $review = Review::updateOrCreate(
             ['product_id' => $product->id, 'user_id' => Auth::id()],
-            array_merge($data, ['is_approved' => true])
+            array_merge($data, ['is_approved' => false])
         );
 
-        return back()->with('success', 'Cảm ơn bạn đã đánh giá sản phẩm!');
+        ReviewSubmitted::dispatch($review, $product);
+
+        return back()->with('success', 'Cảm ơn bạn! Đánh giá đã gửi và đang chờ duyệt.');
     }
 }

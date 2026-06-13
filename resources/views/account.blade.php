@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Tài Khoản — SportShop')
+@section('title', 'Tài Khoản — AZRun')
 
 @section('content')
 <div class="max-w-5xl mx-auto px-4 py-8 md:py-12">

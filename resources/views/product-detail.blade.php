@@ -1,8 +1,14 @@
 @extends('layouts.app')
-@section('title', $product->name . ' — SportShop')
+@section('title', $product->name . ' — AZRun')
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 py-6 md:py-10">
+
+    @if(session('success'))
+        <div class="mb-6 px-5 py-4 bg-green-50 border border-green-200 text-green-800 rounded-2xl text-sm font-medium">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <nav class="text-sm text-gray-500 mb-6 flex flex-wrap items-center gap-1">
         <a href="/" class="hover:text-accent transition-colors">Trang chủ</a>
@@ -19,26 +25,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
 
         {{-- Gallery --}}
-        <div x-data="{ activeImg: '{{ $product->thumbnail }}' }">
-            <div class="bg-white rounded-3xl overflow-hidden shadow-card mb-4 relative group">
-                @if($product->isOnSale() && $product->discount_percent)
-                    <span class="absolute top-4 left-4 z-10 px-3 py-1.5 bg-accent text-white text-sm font-black rounded-full shadow-lg">-{{ $product->discount_percent }}%</span>
-                @endif
-                <img :src="activeImg" src="{{ $product->thumbnail }}" alt="{{ $product->name }}" class="w-full aspect-square object-cover">
-            </div>
-            @if($product->images && count($product->images))
-                <div class="grid grid-cols-5 gap-2">
-                    <button @click="activeImg='{{ $product->thumbnail }}'" :class="activeImg==='{{ $product->thumbnail }}' ? 'ring-2 ring-accent ring-offset-2' : 'opacity-70 hover:opacity-100'" class="rounded-xl overflow-hidden transition-all">
-                        <img src="{{ $product->thumbnail }}" alt="" class="w-full aspect-square object-cover">
-                    </button>
-                    @foreach($product->images as $img)
-                        <button @click="activeImg='{{ $img }}'" :class="activeImg==='{{ $img }}' ? 'ring-2 ring-accent ring-offset-2' : 'opacity-70 hover:opacity-100'" class="rounded-xl overflow-hidden transition-all">
-                            <img src="{{ $img }}" alt="" class="w-full aspect-square object-cover">
-                        </button>
-                    @endforeach
-                </div>
-            @endif
-        </div>
+        <x-product-gallery :product="$product" />
 
         {{-- Info --}}
         <div class="lg:sticky lg:top-24 lg:self-start">

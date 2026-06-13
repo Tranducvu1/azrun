@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'review_webhook' => [
+        'url' => env('REVIEW_WEBHOOK_URL'),
+    ],
+
 ];

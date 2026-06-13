@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('discount', 12, 2)->default(0);
             $table->decimal('shipping_fee', 12, 2)->default(0);
             $table->decimal('total', 12, 2)->default(0);
-            $table->foreignId('coupon_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('coupon_id')->nullable();
             $table->string('name');
             $table->string('phone');
             $table->string('email')->nullable();

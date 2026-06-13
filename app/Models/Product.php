@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\ImageUrl;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -82,7 +83,25 @@ class Product extends Model
 
     public function displayThumbnail(): string
     {
-        return $this->attributes['thumbnail'] ?? 'https://placehold.co/600x600/e2e8f0/64748b?text=SportShop';
+        return ImageUrl::resolve($this->attributes['thumbnail'] ?? null);
+    }
+
+    /** @return array<int, string> */
+    public function galleryImages(): array
+    {
+        $paths = [];
+        if ($this->attributes['thumbnail'] ?? null) {
+            $paths[] = $this->attributes['thumbnail'];
+        }
+        if (is_array($this->images)) {
+            foreach ($this->images as $img) {
+                if ($img) {
+                    $paths[] = $img;
+                }
+            }
+        }
+
+        return ImageUrl::resolveMany($paths);
     }
 
     public function getAvgRatingAttribute(): float

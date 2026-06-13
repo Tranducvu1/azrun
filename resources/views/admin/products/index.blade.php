@@ -6,9 +6,9 @@
 <div class="flex items-center justify-between mb-6">
     <form method="GET" class="flex gap-2">
         <input type="text" name="q" value="{{ request('q') }}" placeholder="Tìm sản phẩm..." class="px-3 py-2 border rounded-lg text-sm w-64">
-        <button class="px-4 py-2 bg-gray-800 text-white rounded-lg text-sm">Tìm</button>
+        <button class="px-4 py-2 bg-sport-accent text-white rounded-lg text-sm hover:bg-orange-600">Tìm</button>
     </form>
-    <a href="{{ route('admin.products.create') }}" class="px-4 py-2 bg-sport-accent text-white rounded-lg text-sm font-medium hover:bg-red-600">+ Thêm sản phẩm</a>
+    <a href="{{ route('admin.products.create') }}" class="px-4 py-2 bg-sport-accent text-white rounded-lg text-sm font-medium hover:bg-orange-600">+ Thêm sản phẩm</a>
 </div>
 
 <div class="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -19,6 +19,7 @@
                 <th class="px-4 py-3 text-left">Tên</th>
                 <th class="px-4 py-3 text-left">Danh mục</th>
                 <th class="px-4 py-3 text-left">Giá</th>
+                <th class="px-4 py-3 text-left">Size</th>
                 <th class="px-4 py-3 text-left">Kho</th>
                 <th class="px-4 py-3 text-left">Trạng thái</th>
                 <th class="px-4 py-3 text-right">Thao tác</th>
@@ -27,13 +28,20 @@
         <tbody>
             @foreach($products as $product)
                 <tr class="border-t hover:bg-gray-50">
-                    <td class="px-4 py-3"><img src="{{ $product->thumbnail }}" class="w-12 h-12 rounded object-cover" alt=""></td>
+                    <td class="px-4 py-3"><img src="{{ $product->displayThumbnail() }}" class="w-12 h-12 rounded object-cover" alt="{{ $product->name }}"></td>
                     <td class="px-4 py-3">
                         <p class="font-medium line-clamp-2 max-w-xs">{{ $product->name }}</p>
                         <p class="text-xs text-gray-400">{{ $product->sku }}</p>
                     </td>
                     <td class="px-4 py-3">{{ $product->category->name ?? '-' }}</td>
                     <td class="px-4 py-3 font-medium text-sport-accent">{{ number_format($product->current_price, 0, ',', '.') }}đ</td>
+                    <td class="px-4 py-3 text-xs text-gray-500">
+                        @if($product->variants->count())
+                            {{ $product->variants->pluck('name')->join(', ') }}
+                        @else
+                            —
+                        @endif
+                    </td>
                     <td class="px-4 py-3">{{ $product->stock_quantity }}</td>
                     <td class="px-4 py-3">
                         @if($product->is_active)
